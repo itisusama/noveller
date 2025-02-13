@@ -8,22 +8,19 @@ import Settings from "../assets/Setting.svg";
 export const sidebarData = [
   {
     id: 0,
-    icon: Home,
     title: "Dashboard",
     route: "/dashboard",
   },
   {
     id: 2,
-    icon: User,
     title: "Gallery",
     route: "/gallery",
   },
-  // {
-  //   id: 3,
-  //   icon: Games,
-  //   title: "Games",
-  //   route: "/games",
-  // },
+  {
+    id: 3,
+    title: "Add Info",
+    route: "/add-info",
+  },
   // {
   //   id: 4,
   //   icon: Shop,

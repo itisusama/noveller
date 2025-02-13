@@ -109,7 +109,7 @@ const SideBar = ({ activeSection, setActiveSection }) => {
                           isCollapsed ? "py-2 px-2 ml-[-0.5rem]" : "mr-9 ml-7 py-2"
                         }`}
                       >
-                        <img src={e.icon} alt={e.title} className={`${isCollapsed ? "ml-2" : "w-6 h-6"}`} />
+                        
                         {!isCollapsed && (
                           <div className="ml-5 flex-1 font-inter font-[400] text-[16px]">{e.title}</div>
                         )}

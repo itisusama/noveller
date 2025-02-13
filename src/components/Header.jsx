@@ -19,6 +19,9 @@ const Header = () => {
       case "/add-images":
         title = "Gallery/ Add Images";
         break;
+      case "/add-info":
+        title = "Add Info";
+        break;
       default:
         title = "Default Title";
         break;
@@ -31,7 +34,9 @@ const Header = () => {
           <h1 className="text-xl text-gray-800 pl-4">{title}</h1>
         </div>
 
-        <div className="flex items-center justify-end space-x-4 sm:space-x-6 pr-4 sm:pr-7">
+        <h1>Author: Thritter</h1>
+
+        {/* <div className="flex items-center justify-end space-x-4 sm:space-x-6 pr-4 sm:pr-7">
           <Link to="/notification">
             <div className="relative cursor-pointer">
               <img
@@ -50,7 +55,7 @@ const Header = () => {
               />
             </div>
           </Link>
-        </div>
+        </div> */}
       </div>
     </>
   );

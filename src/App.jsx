@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPages/LoginPage";
 import ForgetPasswordPage from "./pages/LoginPages/ForgetPasswordPage";
 import ProtectedRoute from "./config/route/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
+import AddInfo from "./pages/AddInfo";
 import Gallery from "./pages/Gallery";
 import AddImages from "./pages/AddImages";
 
@@ -15,6 +16,7 @@ const App = () => {
                 <Route path="/" element={<LoginPage />} />
                 <Route path="/forgot-password" element= {<ForgetPasswordPage />} />
                 <Route path="/dashboard" element={<ProtectedRoute component={Dashboard} />}/>
+                <Route path="/add-info" element={<ProtectedRoute component={AddInfo} />}/>
                 <Route path="/gallery" element={<ProtectedRoute component={Gallery} />}/>
                 <Route path="/add-images" element={<ProtectedRoute component={AddImages} />}/>
             </Routes>
