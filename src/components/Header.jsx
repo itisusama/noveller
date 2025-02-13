@@ -25,6 +25,9 @@ const Header = () => {
       case "/get-info":
         title = "Get Info";
         break;
+      case "/story-maker":
+        title = "Story Maker";
+        break;
       default:
         title = "Default Title";
         break;

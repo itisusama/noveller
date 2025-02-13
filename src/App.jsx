@@ -7,6 +7,7 @@ import ProtectedRoute from "./config/route/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import AddInfo from "./pages/AddInfo";
 import GetInfo from "./pages/GetInfo";
+import StoryMaker from "./pages/StoryMaker";
 import Gallery from "./pages/Gallery";
 import AddImages from "./pages/AddImages";
 
@@ -19,6 +20,7 @@ const App = () => {
                 <Route path="/dashboard" element={<ProtectedRoute component={Dashboard} />}/>
                 <Route path="/add-info" element={<ProtectedRoute component={AddInfo} />}/>
                 <Route path="/get-info" element={<ProtectedRoute component={GetInfo} />}/>
+                <Route path="/story-maker" element={<ProtectedRoute component={StoryMaker} />}/>
                 <Route path="/gallery" element={<ProtectedRoute component={Gallery} />}/>
                 <Route path="/add-images" element={<ProtectedRoute component={AddImages} />}/>
             </Routes>

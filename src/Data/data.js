@@ -26,12 +26,11 @@ export const sidebarData = [
     title: "Get Info",
     route: "/get-info",
   },
-  // {
-  //   id: 5,
-  //   icon: Learn,
-  //   title: "Learn",
-  //   route: "/learn",
-  // },
+  {
+    id: 5,
+    title: "Story Maker",
+    route: "/story-maker",
+  },
   // {
   //   id: 6,
   //   icon: Settings,
