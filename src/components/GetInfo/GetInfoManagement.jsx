@@ -43,7 +43,7 @@ const GetInfoManagement = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen p-6 bg-gray-100">
+    <div className="flex flex-col h-screen overflow-y-auto p-6 bg-gray-100">
       <h1 className="text-xl font-bold mb-4">Get Info</h1>
       <div className="grid grid-cols-2 gap-4">
         <div>
@@ -86,6 +86,7 @@ const GetInfoManagement = () => {
           </div>
         </div>
       </div>
+      <div className="mb-24"></div>
     </div>
   );
 };
