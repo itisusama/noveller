@@ -34,8 +34,8 @@ const GetInfoManagement = () => {
           <div className="grid grid-cols-2 gap-2">
             {characters.map((char) => (
               <div key={char.id} className="p-4 bg-white rounded shadow-md">
-                <h3 className="font-bold">{char.nickName}</h3>
-                <p className="text-sm">{char.realName}</p>
+                <h3 className="font-bold">{char.realName}</h3>
+                <p className="text-sm">{char.nickName}</p>
                 <p className="text-xs text-gray-500">{char.role}</p>
               </div>
             ))}
