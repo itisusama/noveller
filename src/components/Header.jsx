@@ -22,6 +22,9 @@ const Header = () => {
       case "/add-info":
         title = "Add Info";
         break;
+      case "/get-info":
+        title = "Get Info";
+        break;
       default:
         title = "Default Title";
         break;

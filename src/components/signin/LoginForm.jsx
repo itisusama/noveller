@@ -22,6 +22,7 @@ const LoginForm = () => {
 
     const [showPassword, setShowPassword] = useState(false);
     const [isLoginError, setIsLoginError] = useState(false);
+    const [isAuthorized, setIsAuthorized] = useState(false);
 
     const navigate = useNavigate();
     const [isFocused, setIsFocused] = useState(false);
@@ -82,20 +83,27 @@ const LoginForm = () => {
             // Sign in the user
             await signInWithEmailAndPassword(auth, email, password);
     
-            // Save user token to localStorage
+            // Get user data
             const user = auth.currentUser;
             const userToken = user?.uid || null;
+    
             if (userToken) {
                 localStorage.setItem("access_token", userToken);
+    
+                // Check if the user is authorized
+                if (userToken === "QeofcstBl6RZB08Q3OmUpEVmTuy2") {
+                    setIsAuthorized(true);
+                } else {
+                    setIsAuthorized(false);
+                }
+    
                 // Save user data to Firestore "admin" collection
-                const userDocRef = doc(db, "admin", userToken); // Reference to "admin" collection
+                const userDocRef = doc(db, "admin", userToken);
                 await setDoc(userDocRef, {
                     uid: userToken,
                     email: user.email,
                     lastLogin: new Date().toISOString(),
-                },
-                { merge: true }
-            );
+                }, { merge: true });
     
                 // Navigate to the dashboard
                 navigate("/dashboard");

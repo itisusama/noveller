@@ -5,6 +5,7 @@ import { collection, addDoc } from "firebase/firestore";
 const AddInfoManagement = () => {
   const [showCharacterPopup, setShowCharacterPopup] = useState(false);
   const [showLocationPopup, setShowLocationPopup] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [character, setCharacter] = useState({
     realName: "",
@@ -12,7 +13,6 @@ const AddInfoManagement = () => {
     role: "",
   });
 
-  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setCharacter({ ...character, [e.target.name]: e.target.value });
@@ -37,6 +37,41 @@ const AddInfoManagement = () => {
     } catch (error) {
       console.error("Error adding character: ", error);
       alert("Failed to add character");
+    } finally {
+        setLoading(false);
+    }
+  };
+
+  const [location, setLocation] = useState({
+    realNameLocation: "",
+    nickNameLocation: "",
+    roleLocation: "",
+  });
+
+
+  const handleChangeLocation = (e) => {
+    setLocation({ ...location, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmitLocation = async (e) => {
+    e.preventDefault();
+    if (!location.realNameLocation || !location.nickNameLocation || !location.roleLocation) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    try {
+      setLoading(true)
+      await addDoc(collection(db, "locations"), {
+        realName: location.realNameLocation,
+        nickName: location.nickNameLocation,
+        role: location.roleLocation,
+      });
+      alert("Location added successfully!");
+      setLocation({ realNameLocation: "", nickNameLocation: "", roleLocation: "" });
+    } catch (error) {
+      console.error("Error adding Location: ", error);
+      alert("Failed to add Location");
     } finally {
         setLoading(false);
     }
@@ -123,9 +158,53 @@ const AddInfoManagement = () => {
       {/* Location Popup */}
       {showLocationPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96 text-center">
-            <h2 className="text-lg font-semibold mb-4">Add Locations</h2>
-            <p>Data will be added here.</p>
+        <div className="bg-white p-6 rounded-lg shadow-lg w-96 text-center">
+          <h2 className="text-lg font-semibold mb-4">Add Location</h2>
+          
+          <div className="max-w-lg mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
+    <form onSubmit={handleSubmitLocation} className="space-y-4">
+      <div>
+        <label className="block text-gray-700">Real Name Location</label>
+        <input
+          type="text"
+          name="realNameLocation"
+          value={location.realNameLocation}
+          onChange={handleChangeLocation}
+          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="Enter real name"
+        />
+      </div>
+      <div>
+        <label className="block text-gray-700">Nickname Location</label>
+        <input
+          type="text"
+          name="nickNameLocation"
+          value={location.nickNameLocation}
+          onChange={handleChangeLocation}
+          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="Enter nickname"
+        />
+      </div>
+      <div>
+        <label className="block text-gray-700">Role Location</label>
+        <input
+          type="text"
+          name="roleLocation"
+          value={location.roleLocation}
+          onChange={handleChangeLocation}
+          className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="Enter role"
+        />
+      </div>
+      <button
+        type="submit"
+        className="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition duration-300"
+        disabled={loading}
+      >
+        {loading ? "Adding..." : "Add Location" }
+      </button>
+    </form>
+  </div>
             <button
               className="mt-4 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-600"
               onClick={() => setShowLocationPopup(false)}
