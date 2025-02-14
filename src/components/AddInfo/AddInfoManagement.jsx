@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { db } from "../../config/firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 
 const AddInfoManagement = () => {
   const [showCharacterPopup, setShowCharacterPopup] = useState(false);
   const [showLocationPopup, setShowLocationPopup] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [characters, setCharacters] = useState([]);
+  const [locations, setlocations] = useState([]);
 
   const [character, setCharacter] = useState({
     realName: "",
@@ -76,6 +78,20 @@ const AddInfoManagement = () => {
         setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const fetchCollection = async (collectionName, setData) => {
+      const querySnapshot = await getDocs(collectionName);
+      const mapData = querySnapshot.docs.map(doc => doc.data());
+      setData(mapData);
+    };
+  
+    let characterCollection = collection(db, "characters");
+  
+    fetchCollection(characterCollection, setCharacters);
+  
+  }, []);
+  
 
   return (
     <div className="flex flex-col h-screen p-6">
@@ -214,6 +230,21 @@ const AddInfoManagement = () => {
           </div>
         </div>
       )}
+
+      <section className="grid grid-cols-2">
+      
+      <div>
+      <h1 className="font-bold text-2xl">Chatacters</h1>
+      {characters.map((character, index) => (
+        <p key={index}>{character.realName}</p>
+      ))}
+      </div>
+      
+      <div>
+        New Data
+      </div>
+      </section>
+
     </div>
   );
 };
